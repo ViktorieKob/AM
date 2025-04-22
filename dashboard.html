@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard – Docházka</title>
+  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css' rel='stylesheet' />
   <link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
@@ -40,14 +41,18 @@
     </div>
   </div>
 
+  <!-- Skripty -->
   <script>
     fetch('menu.html')
       .then(res => res.text())
       .then(data => {
         document.getElementById('menu-container').innerHTML = data;
+        const logo = document.querySelector('.menu img');
+        if (logo) logo.src = 'Logo.png.png'; // oprava názvu loga
       });
   </script>
 
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js'></script>
   <script type="module" src="firebase.js"></script>
   <script type="module" src="dashboard.js"></script>
 </body>
