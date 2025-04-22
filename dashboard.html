@@ -65,29 +65,7 @@
   </script>
 
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js'></script>
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-
-    const firebaseConfig = {
-      // ← nezapomeň sem doplnit vlastní config
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    onAuthStateChanged(auth, (user) => {
-      const loading = document.getElementById("loading");
-      const content = document.querySelector(".dashboard-container");
-
-      if (user && user.email === "sestra@test.cz") {
-        loading.style.display = "none";
-        content.style.display = "block";
-        import('./dashboard.js'); // načti JS jen pro oprávněného uživatele
-      } else {
-        window.location.href = "index.html";
-      }
-    });
-  </script>
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="dashboard.js"></script>
 </body>
 </html>

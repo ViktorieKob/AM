@@ -1,17 +1,11 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
-// Firebase config (nahraď svým)
-const firebaseConfig = {
-  // zde bude tvá konfigurace
-};
+import { app } from './firebase.js';
 
-const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// DOM prvky
 const calendarEl = document.getElementById("calendar");
 const modal = document.getElementById("modal");
 const selectedDaysSpan = document.getElementById("selected-days");
@@ -21,8 +15,13 @@ const cancelBtn = document.getElementById("cancel-request");
 let selectedDates = [];
 
 onAuthStateChanged(auth, (user) => {
-  if (user) {
-    document.getElementById("username").innerText = "Moje směny a dovolená (" + user.email + ")";
+  const loading = document.getElementById("loading");
+  const content = document.querySelector(".dashboard-container");
+
+  if (user && user.email === "sestra@test.cz") {
+    loading.style.display = "none";
+    content.style.display = "block";
+    document.getElementById("username").innerText += ` (${user.email})`;
     loadCalendar(user);
   } else {
     window.location.href = "index.html";
@@ -48,7 +47,6 @@ function loadCalendar(user) {
   calendar.render();
 }
 
-// Pomocná funkce pro výběr více dní
 function getDateRange(start, end) {
   const dates = [];
   const current = new Date(start);
@@ -74,7 +72,7 @@ confirmBtn.addEventListener("click", async () => {
   }
 
   modal.classList.add("hidden");
-  location.reload(); // dočasné obnovení pro zobrazení stavu
+  location.reload();
 });
 
 cancelBtn.addEventListener("click", () => {
