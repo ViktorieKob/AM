@@ -1,10 +1,10 @@
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+import { auth } from './firebase.js';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+import { getApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 
-import { app } from './firebase.js';
-
-const auth = getAuth(app);
-const db = getFirestore(app);
+const db = getFirestore(getApp());
 
 const calendarEl = document.getElementById("calendar");
 const modal = document.getElementById("modal");
