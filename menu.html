@@ -1,0 +1,57 @@
+<!-- menu.html -->
+<style>
+  .menu {
+    position: sticky;
+    top: 0;
+    background-color: #0b2c4d; /* tmavě modrá */
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    z-index: 999;
+    flex-wrap: wrap;
+  }
+
+  .menu img {
+    height: 40px;
+    margin-right: 20px;
+  }
+
+  .menu a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .menu a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .menu {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .menu a {
+      margin: 10px 0;
+    }
+
+    .menu img {
+      margin-bottom: 10px;
+    }
+  }
+</style>
+
+<nav class="menu">
+  <img src="logo.png" alt="Advantis Medical Logo" />
+  <a href="dashboard.html">Dashboard</a>
+  <a href="zadosti.html">Schvalování dovolených</a>
+  <a href="planovani.html">Plánování směn</a>
+  <a href="smeny.html">Směny</a>
+  <a href="historie.html">Historie</a>
+  <a href="pacienti.html">Pacienti</a>
+  <a href="#" onclick="logout()">Odhlásit se</a>
+</nav>
