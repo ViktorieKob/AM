@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard – Docházka</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <div id="menu-container"></div>
+
+  <div class="dashboard-container">
+    <h2 id="username">Moje směny a dovolená</h2>
+    <div class="stats">
+      <p>Počet nadcházejících směn: <span id="sm-shifts">0</span></p>
+      <p>Počet zadaných žádostí: <span id="sm-requests">0</span></p>
+      <p>Počet dnů dovolené: <span id="total-leave">0</span></p>
+      <p>Počet dnů zadané dovolené: <span id="requested-leave">0</span></p>
+      <p>Počet dnů schválené dovolené: <span id="approved-leave">0</span></p>
+    </div>
+
+    <div id="calendar"></div>
+
+    <!-- Modal pro výběr typu volna -->
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <h3>Žádost o volno</h3>
+        <p>Vybrané dny: <span id="selected-days"></span></p>
+        <label>
+          <input type="radio" name="leave-type" value="Dovolená" checked />
+          Dovolená
+        </label>
+        <label>
+          <input type="radio" name="leave-type" value="Neplacené volno" />
+          Neplacené volno
+        </label>
+        <button id="confirm-request">Potvrdit žádost</button>
+        <button id="cancel-request">Zrušit</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    fetch('menu.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('menu-container').innerHTML = data;
+      });
+  </script>
+
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>
