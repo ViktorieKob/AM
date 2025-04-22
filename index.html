@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <title>Přihlášení – Docházka</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-container">
+    <img src="Logo.png.png" alt="Advantis Medical logo" class="logo" />
+    <h2>Přihlášení</h2>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Heslo">
+    <button onclick="login()">Přihlásit se</button>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyD4j1bO7JDbzUM-ca4AWUSkGYpmglWK_IQ",
+      authDomain: "dochazka-app.firebaseapp.com",
+      projectId: "dochazka-app",
+      storageBucket: "dochazka-app.firebasestorage.app",
+      messagingSenderId: "912220280247",
+      appId: "1:912220280247:web:e0b27491b9234cba984432"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => {
+          if (email === "vedouci@test.cz") {
+            window.location.href = "zadosti.html";
+          } else {
+            window.location.href = "dashboard.html";
+          }
+        })
+        .catch(error => {
+          alert("Chyba při přihlášení: " + error.message);
+        });
+    }
+  </script>
+</body>
+</html>

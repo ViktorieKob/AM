@@ -1,0 +1,58 @@
+body {
+  font-family: sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.logo {
+  width: 180px;
+  margin-bottom: 20px;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: calc(100% - 24px);  /* malý prostor navíc */
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #0057a0; /* modrá z loga */
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #003d75;
+}
+
+.radek-schvaleno {
+  background-color: #d4edda;
+}
+.radek-zamitnuto {
+  background-color: #f8d7da;
+}
+.radek-ceka {
+  background-color: #fff3cd;
+}
