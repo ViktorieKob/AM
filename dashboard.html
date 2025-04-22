@@ -6,11 +6,24 @@
   <title>Dashboard – Docházka</title>
   <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css' rel='stylesheet' />
   <link rel="stylesheet" href="dashboard.css" />
+  <style>
+    #loading {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: white;
+      z-index: 10000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5em;
+    }
+  </style>
 </head>
 <body>
+  <div id="loading">Načítání...</div>
   <div id="menu-container"></div>
 
-  <div class="dashboard-container">
+  <div class="dashboard-container" style="display:none;">
     <h2 id="username">Moje směny a dovolená</h2>
     <div class="stats">
       <p>Počet nadcházejících směn: <span id="sm-shifts">0</span></p>
@@ -41,19 +54,40 @@
     </div>
   </div>
 
-  <!-- Skripty -->
   <script>
     fetch('menu.html')
       .then(res => res.text())
       .then(data => {
         document.getElementById('menu-container').innerHTML = data;
         const logo = document.querySelector('.menu img');
-        if (logo) logo.src = 'Logo.png.png'; // oprava názvu loga
+        if (logo) logo.src = 'Logo.png.png';
       });
   </script>
 
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js'></script>
-  <script type="module" src="firebase.js"></script>
-  <script type="module" src="dashboard.js"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+
+    const firebaseConfig = {
+      // ← nezapomeň sem doplnit vlastní config
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, (user) => {
+      const loading = document.getElementById("loading");
+      const content = document.querySelector(".dashboard-container");
+
+      if (user && user.email === "sestra@test.cz") {
+        loading.style.display = "none";
+        content.style.display = "block";
+        import('./dashboard.js'); // načti JS jen pro oprávněného uživatele
+      } else {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
 </body>
 </html>
